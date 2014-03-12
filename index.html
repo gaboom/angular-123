@@ -1,26 +1,81 @@
 <!DOCTYPE html>
-<html data-ng-app>
+<html data-ng-app="kungFuApp">
     <head>
-        <title>{{title}}</title>
+        <title data-ng-controller="NamesController">{{title}}</title>
         <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
         <script>
-            function NamesController($scope) {
-                $scope.title = "Kung fu";
-                $scope.styles = [
-                    {name: "Wing Tsun", origin: "China"},
-                    {name: "Shaolin-do", origin: "China"},
-                    {name: "Judo", origin: "Japan"},
-                    {name: "Taekwon-do", origin: "Korea"}
-                ];
-            }
+            var kungFuApp = angular.module("kungFuApp", []);
+
+            kungFuApp.controller("NamesController", function($scope, kungFuService) {
+                $scope.title = kungFuService.getTitle();
+                $scope.styles = kungFuService.getStyles();
+                $scope.customOrder = function (value) {
+                    return value.name.length;
+                };
+            });
+
+            kungFuApp.factory("kungFuService", function($log) {
+                return {
+                    getTitle: function() {
+                        return "Kung fu" + new Date();
+                    },
+                    getStyles: function() {
+                        return [
+                            {name: "Wing Tsun", origin: "China"},
+                            {name: "Shaolin-do", origin: "China"},
+                            {name: "Judo", origin: "Japan"},
+                            {name: "Taekwon-do", origin: "Korea"}
+                        ];
+                    }
+                }
+            });
+            
+            kungFuApp.filter("countryDomain", function() {
+                return function (name) {
+                    switch (name) {
+                        case "Japan": name += " (.jp)";
+                            break;
+                    }
+                    return name;
+                };
+            });
+            
+            kungFuApp.filter("countryDomain", function() {
+                return function (name) {
+                    switch (name) {
+                        case "Japan": name += " (.jp)";
+                            break;
+                    }
+                    return name;
+                };
+            });
+            
+            kungFuApp.filter("countryDomain", function() {
+                return function (name) {
+                    switch (name) {
+                        case "Japan": name += " (.jp)";
+                            break;
+                    }
+                    return name;
+                };
+            });
+            
+            kungFuApp.filter("customFilterFilter", function() {
+                return function (data, probability) {
+                    for (var i=0,l=data.length;i<l;i++) {
+                        data[i].qualified = Math.random() > probability;
+                    }
+                    return data;
+                };
+            });
         </script>
     </head>
     <body>
         <input type="text" data-ng-model="search" />
         <ul data-ng-controller="NamesController">
-            <li data-ng-repeat="style in styles | filter:search | orderBy:'name' ">
-                {{style.name | uppercase }} from {{style.origin}}
+            <li data-ng-repeat="style in styles| filter:search | orderBy:customOrder | customFilterFilter:'0.5' ">
+                {{style.name| uppercase }} from {{style.origin | countryDomain}} ({{style.qualified}})
             </li>
         </ul>
     </body>

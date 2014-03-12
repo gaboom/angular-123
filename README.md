@@ -24,3 +24,10 @@ AngularJS ramp-up
 * narrow
 * order
 * transform
+
+04-factory
+---------
+
+* app module
+* service factory
+* custom filter
