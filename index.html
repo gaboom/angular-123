@@ -7,18 +7,21 @@
         <script>
             function NamesController($scope) {
                 $scope.title = "Kung fu";
-                $scope.names = [
-                    "Wing Tsun",
-                    "Shaolin-do",
-                    "Judo",
-                    "Taekwon-do",
+                $scope.styles = [
+                    {name: "Wing Tsun", origin: "China"},
+                    {name: "Shaolin-do", origin: "China"},
+                    {name: "Judo", origin: "Japan"},
+                    {name: "Taekwon-do", origin: "Korea"}
                 ];
             }
         </script>
     </head>
     <body>
+        <input type="text" data-ng-model="search" />
         <ul data-ng-controller="NamesController">
-            <li data-ng-repeat="name in names">{{name}}</li>
+            <li data-ng-repeat="style in styles | filter:search | orderBy:'name' ">
+                {{style.name | uppercase }} from {{style.origin}}
+            </li>
         </ul>
     </body>
 </html>
