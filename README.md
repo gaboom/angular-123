@@ -10,3 +10,10 @@ AngularJS ramp-up
 * single page app
 * directives
 * data binding
+
+02-mvc
+------
+
+* html5
+* controller
+* $scope
