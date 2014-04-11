@@ -1,24 +1,31 @@
 <!DOCTYPE html>
-<html data-ng-app>
+<html ng-app>
     <head>
-        <title>{{title}}</title>
+        <title ng-controller="NamesController">{{title}}</title>
         <meta charset="UTF-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+        <script src="angular.min.js"></script>
         <script>
             function NamesController($scope) {
                 $scope.title = "Kung fu";
-                $scope.names = [
-                    "Wing Tsun",
-                    "Shaolin-do",
-                    "Judo",
-                    "Taekwon-do",
+                $scope.styles = [
+                    {name: "Wing Tsun", count: 0},
+                    {name: "Shaolin-do", count: 0},
+                    {name: "Judo", count: 0},
+                    {name: "Taekwon-do", count: 0}
                 ];
+            }
+            
+            function CountController($scope) {
+                $scope.increment = function(style) { style.count += 1; };
             }
         </script>
     </head>
-    <body>
-        <ul data-ng-controller="NamesController">
-            <li data-ng-repeat="name in names">{{name}}</li>
+    <body ng-controller="NamesController">
+        <ul ng-controller="CountController">
+            <li ng-repeat="style in styles">
+                {{style.name}} ({{style.count}})
+                <button ng-click="increment(style)">add participant</button>
+            </li>
         </ul>
     </body>
 </html>

@@ -14,6 +14,6 @@ AngularJS ramp-up
 02-mvc
 ------
 
-* html5
 * controller
-* $scope
+* $scope nesting
+* events
