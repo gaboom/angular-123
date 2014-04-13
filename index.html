@@ -41,26 +41,6 @@
                 };
             });
             
-            kungFuApp.filter("countryDomain", function() {
-                return function (name) {
-                    switch (name) {
-                        case "Japan": name += " (.jp)";
-                            break;
-                    }
-                    return name;
-                };
-            });
-            
-            kungFuApp.filter("countryDomain", function() {
-                return function (name) {
-                    switch (name) {
-                        case "Japan": name += " (.jp)";
-                            break;
-                    }
-                    return name;
-                };
-            });
-            
             kungFuApp.filter("customFilterFilter", function() {
                 return function (data, probability) {
                     for (var i=0,l=data.length;i<l;i++) {
