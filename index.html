@@ -1,62 +1,48 @@
 <!DOCTYPE html>
-<html ng-app="kungFuApp">
+<html ng-app="lotteryApp">
     <head>
-        <title ng-controller="NamesController">{{title}}</title>
+        <title>Hello Directives</title>
         <meta charset="UTF-8">
         <script src="angular.min.js"></script>
         <script>
-            var kungFuApp = angular.module("kungFuApp", []);
+            var lotteryApp = angular.module("lotteryApp", []);
 
-            kungFuApp.controller("NamesController", function($scope, kungFuService) {
-                $scope.title = kungFuService.getTitle();
-                $scope.styles = kungFuService.getStyles();
-                $scope.customOrder = function (value) {
-                    return value.name.length;
+            lotteryApp.controller("LotteryController", function($scope) {
+                $scope.luckyNumber = function() {
+                    return Math.floor((Math.random()*10)+1);
                 };
             });
-
-            kungFuApp.factory("kungFuService", function($log) {
+            
+            lotteryApp.directive("myNumber", function() {
                 return {
-                    getTitle: function() {
-                        return "Kung fu" + new Date();
-                    },
-                    getStyles: function() {
-                        return [
-                            {name: "Wing Tsun", origin: "China"},
-                            {name: "Shaolin-do", origin: "China"},
-                            {name: "Judo", origin: "Japan"},
-                            {name: "Taekwon-do", origin: "Korea"}
-                        ];
+                    restrict: "A",
+                    link: function(scope, element){
+                        var context = element[0].getContext('2d');
+                        context.fillStyle = "blue";
+                        context.font = "bold 120px Arial";
+                        context.fillText(scope.x, 100, 100);
                     }
-                }
-            });
-            
-            kungFuApp.filter("countryDomain", function() {
-                return function (name) {
-                    switch (name) {
-                        case "Japan": name += " (.jp)";
-                            break;
-                    }
-                    return name;
                 };
             });
-            
-            kungFuApp.filter("customFilterFilter", function() {
-                return function (data, probability) {
-                    for (var i=0,l=data.length;i<l;i++) {
-                        data[i].qualified = Math.random() > probability;
-                    }
-                    return data;
-                };
-            });
+
         </script>
+        <style>
+            .won {
+                background-color: greenyellow;
+            }
+        </style>
     </head>
     <body>
-        <input type="text" ng-model="search" />
-        <ul ng-controller="NamesController">
-            <li ng-repeat="style in styles| filter:search | orderBy:customOrder | customFilterFilter:'0.5' ">
-                {{style.name| uppercase }} from {{style.origin | countryDomain}} ({{style.qualified}})
-            </li>
-        </ul>
+        <div ng-controller="LotteryController">
+            <button ng-click="x = luckyNumber()">
+                Draw Number
+            </button>
+            <p ng-class="{won: x > 5}">
+                Number is: {{ x }}
+            </p>
+            <div ng-if="x > 5">
+                <canvas data-my-number></canvas>
+            </div>
+        </div>        
     </body>
 </html>

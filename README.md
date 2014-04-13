@@ -31,3 +31,9 @@ AngularJS ramp-up
 * app module
 * service factory
 * custom filter
+
+05-directives
+-------------
+* if
+* class
+* custom directive
