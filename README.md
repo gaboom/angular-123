@@ -37,3 +37,9 @@ AngularJS ramp-up
 * if
 * class
 * custom directive
+
+05-app
+------
+* modularization
+* ajax
+* i18n i10n

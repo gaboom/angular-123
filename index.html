@@ -1,48 +1,17 @@
 <!DOCTYPE html>
-<html ng-app="lotteryApp">
+<html ng-app="earthApp">
     <head>
-        <title>Hello Directives</title>
+        <title>Earth App</title>
         <meta charset="UTF-8">
-        <script src="angular.min.js"></script>
-        <script>
-            var lotteryApp = angular.module("lotteryApp", []);
-
-            lotteryApp.controller("LotteryController", function($scope) {
-                $scope.luckyNumber = function() {
-                    return Math.floor((Math.random()*10)+1);
-                };
-            });
-            
-            lotteryApp.directive("myNumber", function() {
-                return {
-                    restrict: "A",
-                    link: function(scope, element){
-                        var context = element[0].getContext('2d');
-                        context.fillStyle = "blue";
-                        context.font = "bold 120px Arial";
-                        context.fillText(scope.x, 100, 100);
-                    }
-                };
-            });
-
-        </script>
-        <style>
-            .won {
-                background-color: greenyellow;
-            }
-        </style>
+        <script src="app/lib/angular.js"></script>
+        <script src="app/lib/angular-route.js"></script>
+        <script src="app/lib/angular-gettext.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/app-controller.js"></script>
+        <script src="app/app-service.js"></script>
     </head>
     <body>
-        <div ng-controller="LotteryController">
-            <button ng-click="x = luckyNumber()">
-                Draw Number
-            </button>
-            <p ng-class="{won: x > 5}">
-                Number is: {{ x }}
-            </p>
-            <div ng-if="x > 5">
-                <canvas data-my-number></canvas>
-            </div>
-        </div>        
+        <div ng-include src="'app/header/headline.html'"></div>
+        <div ng-view></div>
     </body>
 </html>

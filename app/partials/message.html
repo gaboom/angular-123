@@ -1,0 +1,8 @@
+<h1 ng-if="error" style="color: red">{{message}}</h1>
+
+<div ng-if="!error">
+    <h3>{{message.title}}</h3>
+    
+    <i>{{message.origin}}</i> @ <i>{{message.date}}</i>
+</div>
+
