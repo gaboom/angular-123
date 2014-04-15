@@ -38,8 +38,14 @@ AngularJS ramp-up
 * class
 * custom directive
 
-05-app
+06-module
 ------
-* modularization
+* navigation
 * ajax
 * i18n i10n
+
+07-test
+-------
+* unit tests
+* e2e tests
+* coverage

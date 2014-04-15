@@ -2,6 +2,7 @@ var earthControllers = angular.module("earthControllers", ["earthServices"]);
 
 earthControllers.controller("MessagesController", function($scope, messageService) {
     messageService.getMessages().then(function(messages) {
+        $scope.count = messages.length;
         $scope.messages = messages;
     });
 });

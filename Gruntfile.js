@@ -8,7 +8,14 @@ module.exports = function(grunt) {
           'app/po/default.pot': ['app/**/*.html']
         }
       },
-    }
+    },
+    nggettext_compile: {
+      all: {
+        files: {
+          'app/app-translations.js': ['app/po/*.po']
+        }
+      },
+    },
   });
   
   // nggettext_extract && nggettext_compile
