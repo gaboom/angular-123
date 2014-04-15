@@ -2,7 +2,8 @@
 
 <div ng-if="!error">
     <h3>{{message.title}}</h3>
-    
-    <i>{{message.origin}}</i> @ <i>{{message.date}}</i>
+    <p>{{message.body}}</p>
+    <i>{{message.origin}}</i> @ <i>{{message.date | myDate}}</i>
+    <aside>{{message.value | myCurrency:message.currency}}</aside>
 </div>
 

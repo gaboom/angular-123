@@ -2,6 +2,6 @@
 
 <ul>
     <li ng-repeat="message in messages">
-        <a href="#/messages/{{message.id}}">{{message.title}}</a>
+        <a href="#/messages/{{message.id}}">{{message.title}}</a> @ {{message.date | myDate:'date'}}
     </li>
 </ul>

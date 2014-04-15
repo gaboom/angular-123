@@ -1,7 +1,8 @@
 var earthApp = angular.module("earthApp", [
     "ngRoute",
     "gettext",
-    "earthControllers"
+    "earthControllers",
+    "earthFilters"
 ]);
 
 earthApp.config(function($routeProvider) {
