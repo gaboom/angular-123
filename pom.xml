@@ -85,15 +85,13 @@
                     <jsTestSrcDir>src/main/www</jsTestSrcDir>
                     
                     <sourceIncludes>
-                        <include>/*.js</include>
-                        <include>/*/*.js</include>
+                        <include>*.js</include>
                     </sourceIncludes>
                     <sourceExcludes>
-                        <exclude>app/app-init.js</exclude>
+                        <exclude>*_test.js</exclude>
                     </sourceExcludes>
                     <specIncludes>
-                        <include>/*.js</include>
-                        <include>/*/*.js</include>
+                        
                     </specIncludes>
                 </configuration>
             </plugin>
@@ -113,7 +111,8 @@
                     <baseDir>http://localhost:${jasmine.serverPort}</baseDir>
                     <outputDir>${project.build.directory}/coverage</outputDir>
                     <noInstrumentPatterns>
-                        <pattern>.*/spec/.*</pattern>
+                        <pattern>./lib/*.js</pattern>
+                        <pattern>*_test.js</pattern>
                     </noInstrumentPatterns>
                 </configuration>
             </plugin>
