@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.earth</groupId>
+    <artifactId>earth-app</artifactId>
+    <packaging>war</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>Earth Value Messenger</name>
+    <description></description>
+
+    <properties>
+        <java.version>1.7</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven-compiler.version>2.3.2</maven-compiler.version>
+        <jasmine.plugin.version>1.3.1.4</jasmine.plugin.version>        
+        <jasmine.serverPort>8234</jasmine.serverPort>
+        <tomcat7.maven.plugin.version>2.2</tomcat7.maven.plugin.version>
+    </properties>
+
+    <build>
+        <finalName>earth-app</finalName>
+        
+        <plugins>
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <debug>true</debug>
+                    <optimize>true</optimize>
+                    <showDeprecation>false</showDeprecation>
+                    <verbose>false</verbose>
+                </configuration>
+            </plugin>       
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId> 
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <webXml>src/main/webapp/WEB-INF/web.xml</webXml> 
+                    <webResources>
+                        <resource>
+                            <directory>src/main/www</directory>
+                        </resource>
+                    </webResources>
+                    <failOnMissingWebXml>true</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>${tomcat7.maven.plugin.version}</version>
+                <configuration>
+                    <port>8080</port>
+                    <path>/${project.build.finalName}</path>
+                    <warFile>modules/ewm-webclient/target/ewm-webclient.war</warFile>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.searls</groupId>
+                <artifactId>jasmine-maven-plugin</artifactId>
+                <version>${jasmine.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <junitXmlReportFileName>TEST-jasmine.xml</junitXmlReportFileName>
+                    <keepServerAlive>true</keepServerAlive>
+
+                    <jsSrcDir>src/main/www</jsSrcDir>
+                    <jsTestSrcDir>src/main/www</jsTestSrcDir>
+                    
+                    <sourceIncludes>
+                        <include>/*.js</include>
+                        <include>/*/*.js</include>
+                    </sourceIncludes>
+                    <sourceExcludes>
+                        <exclude>app/app-init.js</exclude>
+                    </sourceExcludes>
+                    <specIncludes>
+                        <include>/*.js</include>
+                        <include>/*/*.js</include>
+                    </specIncludes>
+                </configuration>
+            </plugin>
+    		
+            <plugin>
+                <groupId>com.github.timurstrekalov</groupId>
+                <artifactId>saga-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>coverage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <baseDir>http://localhost:${jasmine.serverPort}</baseDir>
+                    <outputDir>${project.build.directory}/coverage</outputDir>
+                    <noInstrumentPatterns>
+                        <pattern>.*/spec/.*</pattern>
+                    </noInstrumentPatterns>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

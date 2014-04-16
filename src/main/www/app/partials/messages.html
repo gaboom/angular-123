@@ -1,0 +1,7 @@
+<p translate translate-n="count" translate-plural="Currently there are {{count}} messages:">Current message:</p>
+
+<ul>
+    <li ng-repeat="message in messages">
+        <a href="#/messages/{{message.id}}">{{message.title}}</a> @ {{message.date | myDate:'date'}}
+    </li>
+</ul>

@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/partials/messages.html
+msgid "Current message:"
+msgid_plural "Currently there are {{count}} messages:"
+msgstr[0] "Aktuelle Nachricht:"
+msgstr[1] "{{count}} aktualle Nachrichten:"
+
+#: app/partials/headline.html
+msgid "Greetings Earthlings!"
+msgstr "Güße an euch Erdlinge!"
+
+#: app/partials/headline.html
+msgid "Locales"
+msgstr "Sprachen"
+
+#: app/partials/locales.html
+msgid "Please select a language:"
+msgstr "Bitte wählen Sie eine Sprache:"
+
+#: app/partials/headline.html
+msgid "See Messages"
+msgstr "Nachrichten"
+
+#: app/partials/home.html
+msgid "Welcome to the universe! Please use the navigation on the top."
+msgstr "Willkommen im Universum! Bitte benutzen Sie die obige Navigation."

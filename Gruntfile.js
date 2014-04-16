@@ -5,14 +5,14 @@ module.exports = function(grunt) {
     nggettext_extract: {
       pot: {
         files: {
-          'app/po/default.pot': ['app/**/*.html']
+          'src/main/www/app/po/default.pot': ['app/**/*.html']
         }
       },
     },
     nggettext_compile: {
       all: {
         files: {
-          'app/app-translations.js': ['app/po/*.po']
+          'src/main/www/app/app-translations.js': ['app/po/*.po']
         }
       },
     },
