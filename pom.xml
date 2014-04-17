@@ -76,26 +76,33 @@
                         </goals>
                     </execution>
                 </executions>
-
                 <configuration>
                     <junitXmlReportFileName>TEST-jasmine.xml</junitXmlReportFileName>
+                    <jasmine.serverPort>${jasmine.serverPort}</jasmine.serverPort>
                     <keepServerAlive>true</keepServerAlive>
 
                     <jsSrcDir>src/main/www</jsSrcDir>
                     <jsTestSrcDir>src/main/www</jsTestSrcDir>
                     
+                    <preloadSources>
+                        <source>app/lib/jquery-1.11.0.js</source>
+                        <source>app/lib/angular.js</source>
+                        <source>app/lib/angular-route.js</source>
+                        <source>app/lib/angular-gettext.js</source>
+                        <source>app/lib/angular-mocks.js</source>
+                    </preloadSources>
                     <sourceIncludes>
-                        <include>*.js</include>
+                        <include>app/*.js</include>
                     </sourceIncludes>
                     <sourceExcludes>
-                        <exclude>*_test.js</exclude>
+                        <exclude>app/*_test.js</exclude>
                     </sourceExcludes>
                     <specIncludes>
-                        
+                        <include>app/*_test.js</include>
                     </specIncludes>
                 </configuration>
             </plugin>
-    		
+            
             <plugin>
                 <groupId>com.github.timurstrekalov</groupId>
                 <artifactId>saga-maven-plugin</artifactId>
@@ -111,8 +118,6 @@
                     <baseDir>http://localhost:${jasmine.serverPort}</baseDir>
                     <outputDir>${project.build.directory}/coverage</outputDir>
                     <noInstrumentPatterns>
-                        <pattern>./lib/*.js</pattern>
-                        <pattern>*_test.js</pattern>
                     </noInstrumentPatterns>
                 </configuration>
             </plugin>
