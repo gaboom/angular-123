@@ -1,18 +1,13 @@
-var earthServices = angular.module("earthServices", []);
+var myServices = angular.module("myServices", []);
 
-earthServices.factory("messageService", function($http) {
-    return {
-        getMessages: function() {
-            return $http.get("service/messages.json").then(function(result) {
-                return result.data;
-            });
-        },
-        getMessage: function(id) {
-            return $http.get("service/messages/" + id + ".json").then(function(result) {
-                return result.data;
-            }, function (result) {
-                return result.status;
-            });
-        }
-    };
+myServices.factory("navigationService", function($http) {
+	var lastTab = 0; // Default tab index
+	return {
+		getLastTab: function() {
+			return lastTab;
+		},
+		setLastTab: function(index) {
+			lastTab = index;
+		}
+	};
 });

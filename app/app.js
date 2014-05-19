@@ -1,31 +1,18 @@
-var earthApp = angular.module("earthApp", [
+var myApp = angular.module("myApp", [
     "ngRoute",
-    "gettext",
-    "earthControllers",
-    "earthFilters"
+    "myDirectives",
+    "myServices"
 ]);
 
-earthApp.config(function($routeProvider) {
+myApp.config(function($routeProvider) {
     $routeProvider.when("/", {
-        templateUrl: "app/partials/home.html"
-    }).when("/messages", {
-        templateUrl: "app/partials/messages.html",
-        controller: "MessagesController"
-    }).when("/messages/:messageId", {
-        templateUrl: "app/partials/message.html",
-        controller: "MessageController"
-    }).when("/locales", {
-        templateUrl: "app/partials/locales.html"
+        templateUrl: "app/partials/welcome.html"
+    }).when("/transient_subview", {
+        templateUrl: "app/partials/transient.html"
+    }).when("/persistent_subview", {
+        templateUrl: "app/partials/persistent.html",
+	reloadOnSearch: false
     }).otherwise({
         redirectTo: "/"
     });
-});
-
-earthApp.run(function ($rootScope, gettextCatalog) {
-    gettextCatalog.currentLanguage = 'en';
-    gettextCatalog.debug = true;
-    
-    $rootScope.switchCurrentLanguage=function(language) {
-        gettextCatalog.currentLanguage=language;
-    };
 });
